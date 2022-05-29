@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 
-
 const questionSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ["multi","text","img",]
+        enum: ["multi","text"]
     },
-    questionText: {type : String},
-    multiChoices: {
-        type: Array,
-    },
+    question: {type : String},
+    multis: [{type : String}],
     img : {type: String},
 });
 
