@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3001
 // import express
 const express = require("express")
 const app = express()
-const cowsay = require("cowsay"); //dev dependency for logging fun
 const DATABASE_URL = process.env.DATABASE_URL
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -66,6 +65,4 @@ app.put("/question/:id", async (req, res) => {
 
 
 //listen
-app.listen(PORT, () => console.log(cowsay.say({
-text: `port ${PORT} moo`
-})))
+app.listen(PORT, () => console.log(`port ${PORT} moo`))
