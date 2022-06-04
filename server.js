@@ -12,7 +12,7 @@ const DATABASE_URL = process.env.DATABASE_URL
 const mongoose = require("mongoose")
 const cors = require("cors")
 const morgan = require("morgan")
-const Question = require("./models/question")
+const QuestionModel = require("./models/questionModel")
 
 //mids
 app.use(cors()) // to prevent cors errors, open access to all origins
@@ -28,7 +28,8 @@ app.get("/", (req, res) => {
 // index
 app.get("/questions", async (req, res) => {
   try {
-    res.json(await Question.find({}))
+    res.json(await (await QuestionModel.find({})).reverse())
+    //comment
   } catch (error) {
     res.status(400).json(error)
   }
@@ -37,7 +38,7 @@ app.get("/questions", async (req, res) => {
 // create question
 app.post("/question", async (req, res) => {
   try {
-    res.json(await Question.create(req.body))
+    res.json(await QuestionModel.create(req.body))
   } catch (error) {
     res.status(400).json(error)
   }
@@ -46,7 +47,7 @@ app.post("/question", async (req, res) => {
 // delete question
 app.delete("/question/:id", async (req, res) => {
   try {
-    res.json(await Question.findByIdAndDelete(req.params.id))
+    res.json(await QuestionModel.findByIdAndDelete(req.params.id))
   } catch (error) {
     res.status(400).json(error)
   }
@@ -56,7 +57,7 @@ app.delete("/question/:id", async (req, res) => {
 app.put("/question/:id", async (req, res) => {
   try {
     res.json(
-      await Question.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      await QuestionModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
     )
   } catch (error) {
     res.status(400).json(error)
